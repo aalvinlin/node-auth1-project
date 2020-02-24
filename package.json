@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "knex": "^0.20.10",
+    "sqlite": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
