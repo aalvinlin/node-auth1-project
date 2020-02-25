@@ -68,14 +68,6 @@ router.post("/login", (req, res) => {
                     { res.status(401).json({ message: "Invalid Credentials."})}
             })
             .catch(error => { res.status(401).json({ message: "You shall not pass."})})
-
-        database.addUser(req.body)
-            .then(usersAdded => {
-                res.status(200).json(usersAdded);
-            })
-            .catch(error => {
-                res.status(500).json({message: "Could not add user."})
-            })
     }
 })
 
