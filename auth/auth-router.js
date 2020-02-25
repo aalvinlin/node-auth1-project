@@ -43,6 +43,9 @@ router.post("/signup", (req, res) => {
         let hashedPassword = bcrypt.hashSync(req.body.password, 14);
         req.body.password = hashedPassword;
 
+        req.session.isLoggedIn = true;
+        req.session.username = req.body.username;
+
         database.addUser(req.body)
             .then(usersAdded => {
                 res.status(200).json(usersAdded);
@@ -65,7 +68,11 @@ router.post("/login", (req, res) => {
         database.getUserByUsername(req.body.username)
             .then(databaseInfo => {
                 if (databaseInfo && bcrypt.compareSync(req.body.password, databaseInfo.password))
-                    { res.status(200).json({message: "Welcome, " + databaseInfo.username}) }
+                    {
+                        req.session.isLoggedIn = true;
+                        req.session.username = databaseInfo.username;
+                        res.status(200).json({message: "Welcome, " + databaseInfo.username})
+                    }
                 else
                     { res.status(401).json({ message: "Invalid Credentials."})}
             })
