@@ -1,10 +1,11 @@
-const database = require("../data/login.db3");
+const database = require("../data/db-config");
 
 module.exports = {
     addUser,
 
     getUsers,
-    getUserByID
+    getUserByID,
+    getUserByUsername
 }
 
 function getUsers() {
@@ -14,6 +15,12 @@ function getUsers() {
 function getUserByID(id) {
     return database("users")
         .where({id})
+        .first();
+}
+
+function getUserByUsername(username) {
+    return database("users")
+        .where({username})
         .first();
 }
 
