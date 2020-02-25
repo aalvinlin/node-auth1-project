@@ -38,8 +38,8 @@ router.post("/signup", (req, res) => {
 
     else
     {
-        let hashedPassword = bcrypt.hashSync(user.password, 14);
-        user.password = hashedPassword;
+        let hashedPassword = bcrypt.hashSync(req.body.password, 14);
+        req.body.password = hashedPassword;
 
         database.addUser(req.body)
             .then(usersAdded => {
