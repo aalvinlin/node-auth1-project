@@ -1,12 +1,14 @@
 const bcrypt = require("bcryptjs");
 const express = require("express");
 
+const middleware = require("./restricted-middleware");
+
 const database = require("./auth-model");
 
 const router = express.Router();
 
 // GET all users
-router.get("/", (req, res) => {
+router.get("/users", middleware, (req, res) => {
 
     database.getUsers()
         .then(users => {
