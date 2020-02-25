@@ -73,6 +73,22 @@ router.post("/login", (req, res) => {
     }
 })
 
+// GET: log out a user
+router.get("/logout", (req, res) => {
+
+    // user is not logged in; ignore
+    if (!req.session)
+        { res.status(200).json({message: "No need to log out if you are not logged in."}) }
+    else
+    {
+        req.session.destroy(error => {
+            if (error)
+                { res.status(500).json({message: "Could not log out."}) }
+            else
+                { res.status(200).json({message: "Successfully logged out."}) }
+        })
+    }
+})
 
 module.exports = router;
 

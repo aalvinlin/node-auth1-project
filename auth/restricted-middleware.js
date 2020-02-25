@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 
 const database = require("./auth-model");
 
-const authenticateUser = (req, res, next) => {
+const authenticateUserOld = (req, res, next) => {
 
     if (!req.headers || !req.headers.username || !req.headers.password)
     { res.status(400).json({message: "Username and password are both required."})}
@@ -19,6 +19,14 @@ const authenticateUser = (req, res, next) => {
         })
         .catch(error => { res.status(401).json({ message: "You shall not pass."})})
     }
+}
+
+const authenticateUser = (req, res, next) => {
+
+    if (!req.session || !req.session.isLoggedIn)
+        { res.status(401).json({message: "You need to be logged in to view this."})}
+    else
+        { next(); }
 }
 
 module.exports = authenticateUser;
