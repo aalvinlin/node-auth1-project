@@ -14,7 +14,7 @@ const sessionConfig = {
     name: "user",
     secret: "this is a secret value",
     resave: false,
-    saveUnitialized: true,
+    saveUninitialized: true,
     cookie: {
         maxAge: 1000 * 60 * 10,
         secure: false,

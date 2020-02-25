@@ -83,6 +83,8 @@ router.post("/login", (req, res) => {
 // GET: log out a user
 router.get("/logout", (req, res) => {
 
+    console.log("req.session:", req.session)
+
     // user is not logged in; ignore
     if (!req.session)
         { res.status(200).json({message: "No need to log out if you are not logged in."}) }
