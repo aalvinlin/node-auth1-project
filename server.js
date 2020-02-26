@@ -30,14 +30,18 @@ const sessionConfig = {
 
 }
 
+const serverConfig = {
+    origin: "http://localhost:1234",
+    credentials: true
+}
 
 server.use(express.json());
-server.use(cors());
+server.use(cors(serverConfig));
 
 server.use(session(sessionConfig));
 
 server.use("/api/auth", authRouter);
-server.use("/api/restricted", restricted);
+// server.use("/api/restricted", restricted);
 
 server.get("/", (req, res) => {
     console.log("req.session:", req.session);

@@ -7,7 +7,7 @@ const UserList = ({isLoggedIn, setIsLoggedIn}) => {
 
     useEffect(() => {
 
-        axios.get("http://localhost:5000/api/auth/users")
+        axios.get("http://localhost:5000/api/auth/users", { withCredentials: true})
             .then(response => {
                 console.log("All users response:", response);
 
@@ -23,7 +23,9 @@ const UserList = ({isLoggedIn, setIsLoggedIn}) => {
 
         isLoggedIn ?
 
-            allUsers.map(user => <p key={Date.now()}>{user.username}</p>)
+            <div className="userList">
+                {allUsers.map(user => <p key={user.id}>{user.username}</p>)}
+            </div>
 
             :
 

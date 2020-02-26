@@ -23,6 +23,8 @@ const authenticateUserOld = (req, res, next) => {
 
 const authenticateUser = (req, res, next) => {
 
+    console.log("in middleware", req.session)
+
     if (!req.session || !req.session.isLoggedIn)
         { res.status(401).json({message: "You need to be logged in to view this."})}
     else

@@ -50,6 +50,8 @@ router.post("/signup", (req, res) => {
         req.session.isLoggedIn = true;
         req.session.username = req.body.username;
 
+        console.log("Upon signup: req.session:", req.session);
+
         database.addUser(req.body)
             .then(usersAdded => {
                 res.status(200).json(usersAdded);
@@ -75,6 +77,9 @@ router.post("/login", (req, res) => {
                     {
                         req.session.isLoggedIn = true;
                         req.session.username = databaseInfo.username;
+
+                        console.log("Upon logging in: req.session:", req.session);
+
                         res.status(200).json({message: "Welcome, " + databaseInfo.username})
                     }
                 else
