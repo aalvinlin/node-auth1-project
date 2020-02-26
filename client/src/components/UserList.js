@@ -23,7 +23,7 @@ const UserList = ({isLoggedIn, setIsLoggedIn}) => {
 
         isLoggedIn ?
 
-            allUsers.map(user => <p key={Date.now()}>test</p>)
+            allUsers.map(user => <p key={Date.now()}>{user.username}</p>)
 
             :
 

@@ -20,11 +20,15 @@ router.get("/users", middleware, (req, res) => {
 })
 
 // GET a user by ID
-router.get("/:id", middleware, (req, res) => {
+router.get("/users/:id", middleware, (req, res) => {
 
     database.getUserByID(req.params.id)
         .then(user => {
-            res.status(200).json(user);
+
+            if (user)
+                { res.status(200).json(user); }
+            else
+                { res.status(404).json({message: "No user with ID " + req.params.id + " found."}) }
         })
         .catch(error => {
             res.status(500).json({message: "Could not get user."})
@@ -82,8 +86,6 @@ router.post("/login", (req, res) => {
 
 // GET: log out a user
 router.get("/logout", (req, res) => {
-
-    console.log("req.session:", req.session)
 
     // user is not logged in; ignore
     if (!req.session)
